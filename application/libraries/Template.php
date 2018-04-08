@@ -10,7 +10,7 @@ class Template {
 
         $CI->load->view('template/header.php', $data);
         
-        if($CI->session->userdata('User_Status') == 'Admid'){
+        if($CI->session->userdata('User_Status') == 'Admin'){
             $CI->load->view('menu/menu_admin.php', $data);
         }else if($CI->session->userdata('User_Status') == 'User'){
             $CI->load->view('menu/menu_user.php', $data);

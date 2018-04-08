@@ -16,6 +16,15 @@
                             <a href="<?php echo site_url('/Home/CRUD/');?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
+                            <a href=""><i class="fa fa-building-o fa-fw"></i> Company<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo site_url('Company/');?>"> รายการบริษัท</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href=""><i class="fa fa-bar-chart-o fa-fw"></i> Customer<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -58,18 +67,19 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href=""><i class="fa fa-files-o fa-fw"></i> รับเงิน/เช็ก<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html"> รายการชำระเงิน</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                    <li>
+                        <a href=""><i class="fa fa-files-o fa-fw"></i> รับเงิน/เช็ก<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                         <li>
+                            <a href="blank.html"> รายการชำระเงิน</a>
                         </li>
                     </ul>
-                </div>
+                            <!-- /.nav-second-level -->
+                </li>
+            </ul>
+        </div>
                 <!-- /.sidebar-collapse -->
-            </div>
+    </div>
+
             <!-- /.navbar-static-side -->
-        </nav>
+</nav>

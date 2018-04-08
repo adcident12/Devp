@@ -50,7 +50,7 @@ class Home extends CI_Controller {
         }else{
             $data['user'] = $this->User->get_by_name($username)[0];
 
-            $data['user_status'] = $this->User_Status->get_by_id($data['user']['User_Status_User_Status_id'])[0];
+            $data['user_status'] = $this->User_Status->get_by_id($data['user']['User_Status_id'])[0];
             if($data['user']['User_name'] == $username && $data['user']['User_password'] == $password){
                 $this->session->set_userdata('User_Status', $data['user_status']['User_Status_name']);
                 $this->session->set_userdata('User_name', $data['user']['User_name']);
