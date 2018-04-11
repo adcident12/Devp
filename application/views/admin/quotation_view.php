@@ -26,29 +26,30 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>ลำดับ</th>
-                                        <th>เลขที่อ้างอิง</th>
+                                        <th></th>
                                         <th>บริษัท</th>
-                                        <th>คุณ</th>
+                                        <th>ผู้สั่งซื้อ</th>
                                         <th>วัน/เดือน/ปี</th>
+                                        <th>ระยะเวลาที่ชำระ (วัน)</th>
+                                        <th>ระยะเวลาที่ส่ง (วัน)</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                 <?php $i=1; foreach($qoutation as $row){?>
-                                    <tr class="odd gradeX">
-                                        <td><?php echo $i++; ?></td>
-                                        <td><?php echo $row['Qoutation_num']; ?></td>
-                                        <td><?php echo $row['Quotation_company']; ?></td>
-                                        <td><?php echo $row['Quotation_person']; ?></td>
-                                        <td><?php echo $row['Quotation_date']; ?></td>
+                                 <?php $i=1; foreach($customer_in_quotation as $row) { ?>
+                                    <tr>
+                                        <td class="text-center"><?php echo $i++; ?></td>
+                                        <td><?php echo $row['Cus_CopName']; ?></td>
+                                        <td><?php echo $row['Cus_dealName']." ".$row['Cus_dealLlastName'];; ?></td>
+                                        <td><?php echo $row['Quo_date']; ?></td>
+                                        <td><?php echo $row['Quo_payment']; ?></td>
+                                        <td><?php echo $row['Quo_delivery']; ?></td>
                                         <td class="text-center">
-                                         <a href="<?php echo site_url('Quotation/product/'.$row['Quotation_id']);?>" class="btn btn-info"> เพิ่มสินค้า</a>
-                                         <a href="<?php echo site_url('Quotation/edit_form_quotaion/'.$row['Quotation_id']);?>" class="btn btn-warning"> แก้ไข</a>
-                                         <a href="<?php echo site_url('Quotation/clear/'.$row['Quotation_id']);?>" class="btn btn-danger" OnClick="return chkdel();"> ลบ</a>
+                                         <a href="<?php echo site_url('Quotation/product/'.$row['Quo_id'].'/'.$row['Cus_id']);?>" class="btn btn-info"> เพิ่มสินค้า</a>
+                                         <a href="<?php echo site_url('Quotation/edit_form_quotaion/'.$row['Quo_id'].'/'.$row['Cus_id']);?>" class="btn btn-warning"> แก้ไข</a>
                                         </td>
+                                 <?php } ?>
                                     </tr>
-                                <?php } ?>
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
@@ -80,35 +81,53 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label> เลขที่อ้างอิง</label>
+                        <label> เล่มที่</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="number" min="0" name="quotation" placeholder="กรุณากรอก">
+                        <input class="form-control" type="text" name="Quo_volume" placeholder="กรุณากรอก">
+                    </div>
+
+                    <div class="form-group">
+                        <label> เลขที่</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="Quo_number" placeholder="กรุณากรอก">
                     </div>
                     
                     <div class="form-group">
                         <label> คุณ</label>
                         <p class="help-block"><code>*กรุณาเลือก.</code></p>
-                        <select class="form-control" name="person" id="person" >
+                        <select class="form-control" name="Cus_id" id="Cus_id" >
                             <option>--- กรุณาเลือก ---</option>
-                         <?php foreach ($company_by_customer as $row) { ?>
-                            <option value="<?php echo $row['Customer_name'];?>" data-name="<?php echo $row['Company_name'];?>"><?php echo $row['Customer_name']." บริษัท ".$row['Company_name'];?></option>
-                         <?php } ?>   
+                            <?php foreach($customer as $row) {?>
+                            <option value="<?php echo $row['Cus_id'];?>" data-name="<?php echo $row['Cus_CopName'];?>"><?php echo $row['Cus_dealName']." ".$row['Cus_dealLlastName'];?></option>
+                            <?php } ?>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label> บริษัท</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="text" name="company" id="company">
+                        <input class="form-control" type="text" id="Cus_CopName">
                     </div>
 
                     <div class="form-group" >
                         <label> วัน/เดือน/ปี</label>
                         <p class="help-block"><code>*กรุณากรอก YYYY-MM-DD. ขณะนี้:<B id="demo"></B></code></p>
-                        <input type="text" class="form-control" name="date" placeholder="YYYY-MM-DD" required 
+                        <input type="text" class="form-control" name="Quo_date" placeholder="YYYY-MM-DD" required 
                             pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" 
                             title="Enter a date in this format YYYY-MM-DD"/>
                                 
+                    </div>
+
+                    <div class="form-group">
+                        <label> ระยะเวลาที่ชำระ</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="number" min="" name="Quo_payment" placeholder="กรุณากรอก">
+                    </div>
+
+                    <div class="form-group">
+                        <label> ระยะเวลาที่ส่ง</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="number" min="" name="Quo_delivery" placeholder="กรุณากรอก">
                     </div>
 
                 </div>
@@ -123,9 +142,9 @@
 
 <script>
 jQuery(document).ready(function() {
-    jQuery('#person').on('change', function() {
-        var contact_name = jQuery("#person option:selected").data('name')
-        jQuery("#company").val(contact_name)
+    jQuery('#Cus_id').on('change', function() {
+        var contact_name = jQuery("#Cus_id option:selected").data('name')
+        jQuery("#Cus_CopName").val(contact_name)
     })      
 })
 </script>

@@ -9,51 +9,62 @@
     <!-- /.row -->
         <div class="row">
             <div class="col-md-12">
-            <form action="<?php echo site_url('Customer/edit/'.$customer['Customer_id']); ?>" method="post">
+            <form action="<?php echo site_url('Customer/edit/'.$edit_customer['Cus_id']);?>" method="post">
             <div class="panel-body">
-            <div class="form-group">
+            <div class="modal-body">
+                    <div class="form-group">
                         <label> บริษัท</label>
-                            <select class="form-control" name="company">
-                                <option value="<?php echo $company_by_customer['Company_id'];?>"><?php echo $company_by_customer['Company_name'];?></option>
-                                <?php foreach($company as $row) { ?>
-                                <option value="<?php echo $row['Company_id'];?>"><?php echo $row['Company_name'];?></option>
-                                <?php } ?>
-
-                            </select>
-                            <p class="help-block"><code>*กรุณากรอกเลือก.</code></p>
-                        
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="company"  value="<?php echo $edit_customer['Cus_CopName']; ?>" required>
                     </div>
                     
                     <div class="form-group">
-                        <label> เลขที่ประจำตัวผู้เสียภาษี</label>
-                        <input class="form-control" type="text" name="tax" value="<?php echo $customer['Customer_tex'];?>" required>
+                        <label> ที่อยู่</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <textarea class="form-control" type="text" name="address" rows="3"  required><?php echo $edit_customer['Cus_address']; ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label> ผู้ติดต่อ</label>
-                        <input class="form-control" type="text" name="person" value="<?php echo $customer['Customer_name'];?>" required>
+                        <label> โทรศัพท์</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="tel" name="telephone"  value="<?php echo $edit_customer['Cus_tel']; ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label> เบอร์ติดต่อ</label>
-                        <input class="form-control" type="tel" name="phone" value="<?php echo $customer['Customer_phone'];?>" required>
+                        <label> Fax</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="fax"  value="<?php echo $edit_customer['Cus_fax']; ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label> E-mail</label>
-                        <input class="form-control" type="email" name="email" value="<?php echo $customer['Customer_email'];?>" required>
+                        <label> Email</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="email" name="email"  value="<?php echo $edit_customer['Cus_email']; ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label> หมายเหตุ</label>
-                        <input class="form-control" type="text" name="comment" value="<?php echo $customer['Customer_comment'];?>" required>
-                        <p class="help-block"><code>*กรอกหรือไม่กรอกได้.</code></p>
+                        <label> Tax</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="tax"  value="<?php echo $edit_customer['Cus_tax']; ?>" required>
                     </div>
-                
+
+                    <div class="form-group">
+                        <label> ชื้อ</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="name"  value="<?php echo $edit_customer['Cus_dealName']; ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label> นามสกุล</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="last_name"  value="<?php echo $edit_customer['Cus_dealLlastName']; ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label> มือถือ</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="tel" name="phone"  value="<?php echo $edit_customer['Cus_dealTel']; ?>" required>
+                    </div>
 
                 <div class="footer text-center">
                     <button type="reset" class="btn btn-danger"> ยกเลิก</button>

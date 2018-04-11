@@ -8,34 +8,35 @@ class Customer_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_by_id($Customer_id)
+    public function get_by_id($Cus_id)
     {
-        $this->db->where('Customer_id', $Customer_id);
+        $this->db->where('Cus_id', $Cus_id);
         $this->db->from('Customer');
         $query = $this->db->get();
         return $query->result_array();
+    }
+    public function get_by_name($Cus_CopName)
+    {
+        $this->db->where('Cus_CopName', $Cus_CopName);
+        $this->db->from('Customer');
+        $query = $this->db->get();
+        return $query->result_array();
+        $str = $this->db->last_query();
     }
     public function insert($array)
     {
         return $this->db->insert('Customer',$array);
 
     }
-    public function update($Customer_id, $array)
+    public function delete($Cus_id)
     {
-        $this->db->where('Customer_id', $Customer_id);
-        return $this->db->update('Customer', $array);
+        $this->db->where('Cus_id',$Cus_id);
+        return $this->db->delete('Customer');   
     }
-    public function delete($Customer_id)
+    public function update($Cus_id, $array)
     {
-        $this->db->where('Customer_id',$Customer_id);
-        return $this->db->delete('Customer');
+        $this->db->where('Cus_id',$Cus_id);
+        return $this->db->update('Customer',$array);   
     }
-    public function get_by_company_id($Company_id)
-    {
-        $this->db->where('Company_id', $Company_id);
-        $this->db->from('Customer');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
+  
 }

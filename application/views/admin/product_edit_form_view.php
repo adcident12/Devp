@@ -9,24 +9,12 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-md-12">
-         <form action="<?php echo site_url('Product/edit/'.$product['Product_id']); ?>" method="post">
+         <form action="<?php echo site_url('Product/edit/'.$product['Pro_id']); ?>" method="post">
             <div class="panel-body">
                 <div class="form-group">
                     <label> สินค้า</label>
-                    <input class="form-control" type="text" name="product" value="<?php echo $product['Product_name'];?>" required>
                     <p class="help-block"><code>*กรุณากรอก.</code></p>
-                </div>
-
-                <div class="form-group">
-                    <label> ราคา(THB)</label>
-                    <input class="form-control" type="number" min="0" name="price" value="<?php echo $product['Product_price'];?>" required>
-                    <p class="help-block"><code>*กรุณากรอก.</code></p>
-                </div>
-
-                <div class="form-group">
-                    <label> จำนวน</label>
-                    <input class="form-control" type="number" min="0" name="volume" value="<?php echo $product['Product_volume'];?>" disabled>
-                    <p class="help-block"><code>*กรุณากรอก.</code></p>
+                    <input class="form-control" type="text" name="Pro_name" value="<?php echo $product['Pro_name'];?>" required>
                 </div>
 
             </div>

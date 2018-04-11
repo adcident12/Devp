@@ -8,9 +8,9 @@ class Product_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_by_id($Product_id)
+    public function get_by_id($Pro_id)
     {
-        $this->db->where('Product_id', $Product_id);
+        $this->db->where('Pro_id', $Pro_id);
         $this->db->from('Product');
         $query = $this->db->get();
         return $query->result_array();
@@ -20,14 +20,14 @@ class Product_model extends CI_Model {
         return $this->db->insert('Product',$array);
 
     }
-    public function delete($Product_id)
+    public function delete($Pro_id)
     {
-        $this->db->where('Product_id',$Product_id);
+        $this->db->where('Pro_id',$Pro_id);
         return $this->db->delete('Product');   
     }
-    public function update($Product_id, $array)
+    public function update($Pro_id, $array)
     {
-        $this->db->where('Product_id',$Product_id);
+        $this->db->where('Pro_id',$Pro_id);
         return $this->db->update('Product',$array);   
     }
   

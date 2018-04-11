@@ -37,62 +37,58 @@ class Customer extends CI_Controller {
             $data['status'] = '';
         }
 
-        $data['company'] = $this->Company->gets();
-        $data['data'] = array();
-        foreach ($this->Customer->gets() as $row){
-            $temp_array = array();
-            $temp_array['customer'] = $row;
-            $temp_array['company_by_customer'] = $this->Company->get_by_id($row['Company_id'])[0];
-            array_push($data['data'], $temp_array); 
-        }
-        // print_r($data);
-        // die();
+        $data['customer'] = $this->Customer->gets();
         $this->template->view('admin/customer_view', $data);
     }
     public function add()
     {
         // print_r($_POST);
-        // die();
-        
-        // เพิ่ม Customer
-        $array['Company_id'] = $this->input->post('company');
-        $array['Customer_tex'] = $this->input->post('tax');
-        $array['Customer_name'] = $this->input->post('person');
-        $array['User_Status_id'] = "2";
-        $array['Customer_phone'] = $this->input->post('phone');
-        $array['Customer_email'] = $this->input->post('email');
-        $array['Customer_comment'] = $this->input->post('comment');
+    
+        // เพิ่ม Company
+        $array['Cus_CopName'] = $this->input->post('company');
+        $array['Cus_address'] = $this->input->post('address');
+        $array['Cus_tel'] = $this->input->post('telephone');
+        $array['Cus_fax'] = $this->input->post('fax');
+        $array['Cus_email'] = $this->input->post('email');
+        $array['Cus_tax'] = $this->input->post('tax');
+        $array['Cus_dealName'] = $this->input->post('name');
+        $array['Cus_dealLlastName'] = $this->input->post('last_name');
+        $array['Cus_dealTel'] = $this->input->post('phone');
 
         $this->Customer->insert($array);
         redirect('Customer/index?status=success', 'refresh');
-
-
+        // die();
     }
-    public function edit_form($customer_id)
-    {   
-        $data['company'] = $this->Company->gets();
-        $data['customer'] = $this->Customer->get_by_id($customer_id)[0];
-        $data['company_by_customer'] = $this->Company->get_by_id($data['customer']['Company_id'])[0];
+    public function edit_form($Cus_id)
+    {
+        $data['edit_customer'] = $this->Customer->get_by_id($Cus_id)[0];
         // print_r($data);
-        $this->template->view('admin/customer_edit_form_view', $data);
+    
+        $this->template->view('admin/customer_edit_form_view',$data);
     }
-    public function edit($customer_id)
+    public function edit($Cus_id)
     {
         // print_r($_POST);
-        $array['Customer_name'] = $this->input->post('person');
-        $array['Customer_phone'] = $this->input->post('phone');
-        $array['Customer_email'] = $this->input->post('email');
-        $array['Customer_comment'] = $this->input->post('comment');
-        $array['Customer_tex'] = $this->input->post('tax');
-        $array['Company_id'] = $this->input->post('company');
-        // print_r($array);
-        $this->Customer->update($customer_id, $array);
+        // แก้ไข Company
+        $array['Cus_CopName'] = $this->input->post('company');
+        $array['Cus_address'] = $this->input->post('address');
+        $array['Cus_tel'] = $this->input->post('telephone');
+        $array['Cus_fax'] = $this->input->post('fax');
+        $array['Cus_email'] = $this->input->post('email');
+        $array['Cus_tax'] = $this->input->post('tax');
+        $array['Cus_dealName'] = $this->input->post('name');
+        $array['Cus_dealLlastName'] = $this->input->post('last_name');
+        $array['Cus_dealTel'] = $this->input->post('phone');
+        
+        $this->Customer->update($Cus_id, $array);
         redirect('Customer/index?status=edit_success', 'refresh');
-
+        // die();
+        
+        
     }
-    public function clear($customer_id)
+    public function clear($Cus_id)
     {
-        $this->Customer->delete($customer_id);
+        $this->Customer->delete($Cus_id);
         redirect('Customer/index?status=delete_success', 'refresh');
     }
 }

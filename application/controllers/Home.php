@@ -41,19 +41,24 @@ class Home extends CI_Controller {
     {
         $username = $this->input->post('user_name');
         $password = $this->input->post('password');
-        $data['check_user'] = $this->User->gets()[0];
+        // $data['check_user'] = $this->User->gets()[0];
+        // print_r($data);
+        // die();
 
         if($username == "" && $password == ""){
             redirect('Home/index?status=error_input_username', 'refresh');
         }else if($username=="" || $password==""){
             redirect('Home/index?status=error_input_password', 'refresh');
         }else{
-            $data['user'] = $this->User->get_by_name($username)[0];
-
-            $data['user_status'] = $this->User_Status->get_by_id($data['user']['User_Status_id'])[0];
-            if($data['user']['User_name'] == $username && $data['user']['User_password'] == $password){
-                $this->session->set_userdata('User_Status', $data['user_status']['User_Status_name']);
-                $this->session->set_userdata('User_name', $data['user']['User_name']);
+            $data['Staff'] = $this->User->get_by_user($username)[0];
+                // print_r($data);
+                // die();
+            $data['Staff_Status'] = $this->User_Status->get_by_id($data['Staff']['Status_id'])[0];
+                // print_r($data);
+                // die();
+            if($data['Staff']['Staff_user'] == $username && $data['Staff']['Staff_password'] == $password){
+                $this->session->set_userdata('Staff_Status', $data['Staff_Status']['Status_name']);
+                $this->session->set_userdata('Staff_name', $data['Staff']['Staff_name']);
                 redirect('/Home/CRUD/', 'refresh');
             }else{
                 redirect('Home/index?status=error_input', 'refresh');

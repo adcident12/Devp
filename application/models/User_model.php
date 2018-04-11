@@ -4,21 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User_model extends CI_Model {
     public function gets()
     {
-        $this->db->from('User');
+        $this->db->from('Staff');
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_by_id($User_id)
+    public function get_by_id($Staff_id)
     {
-        $this->db->where('User_id', $User_id);
-        $this->db->from('User');
+        $this->db->where('Staff_id', $Staff_id);
+        $this->db->from('Staff');
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_by_name($User_name)
+    public function get_by_user($Staff_user)
     {
-        $this->db->where('User_name', $User_name);
-        $this->db->from('User');
+        $this->db->where('Staff_user', $Staff_user);
+        $this->db->from('Staff');
         $query = $this->db->get();
         return $query->result_array();
     }

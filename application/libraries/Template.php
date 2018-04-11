@@ -6,13 +6,13 @@ class Template {
     {
         $CI =& get_instance();
 
-        $data['user_name'] = $CI->session->userdata('User_name');
+        $data['Staff_name'] = $CI->session->userdata('Staff_name');
 
         $CI->load->view('template/header.php', $data);
         
-        if($CI->session->userdata('User_Status') == 'Admin'){
+        if($CI->session->userdata('Staff_Status') == 'Admin'){
             $CI->load->view('menu/menu_admin.php', $data);
-        }else if($CI->session->userdata('User_Status') == 'User'){
+        }else if($CI->session->userdata('Staff_Status') == 'User'){
             $CI->load->view('menu/menu_user.php', $data);
         }
         

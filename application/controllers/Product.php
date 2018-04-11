@@ -43,35 +43,31 @@ class Product extends CI_Controller {
     public function add()
     {
         // print_r($_POST);
-        $array['Product_name'] = $this->input->post('product');
-        $array['Product_price'] = $this->input->post('price');
-        $array['Product_volume'] = $this->input->post('volume');
-        // print_r($array);
+        $array['Pro_name'] = $this->input->post('Pro_name');
+
         $this->Product->insert($array);
         redirect('Product/index?status=success', 'refresh');
 
     
     }
-    public function edit_form($product_id)
+    public function edit_form($Pro_id)
     {   
-        $data['product'] = $this->Product->get_by_id($product_id)[0];
+        $data['product'] = $this->Product->get_by_id($Pro_id)[0];
         // print_r($data);
         $this->template->view('admin/product_edit_form_view',$data);
     }
-    public function edit($product_id)
+    public function edit($Pro_id)
     {
         // print_r($_POST);
-        $array['Product_name'] = $this->input->post('product');
-        $array['Product_price'] = $this->input->post('price');
-        $array['Product_volume'] = $this->input->post('volume');
+        $array['Pro_name'] = $this->input->post('Pro_name');
         // print_r($array);
-        $this->Product->update($product_id, $array);
+        $this->Product->update($Pro_id, $array);
         redirect('Product/index?status=edit_success', 'refresh');
 
     }
-    public function clear($product_id)
+    public function clear($Pro_id)
     {
-        $this->Product->delete($product_id);
+        $this->Product->delete($Pro_id);
 
         redirect('Product/index?status=delete_success', 'refresh');
     }

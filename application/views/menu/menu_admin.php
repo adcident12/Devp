@@ -16,19 +16,10 @@
                             <a href="<?php echo site_url('/Home/CRUD/');?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-building-o fa-fw"></i> Company<span class="fa arrow"></span></a>
+                            <a href=""><i class="fa fa-building-o fa-fw"></i> Customer<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo site_url('Company/');?>"> รายการบริษัท</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-bar-chart-o fa-fw"></i> Customer<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php echo site_url('Customer/');?>"> รายการลูกค้า</a>
+                                    <a href="<?php echo site_url('Customer/');?>"> รายการ Customer</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -43,13 +34,15 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-table fa-fw"></i> Quotation<span class="fa arrow"></span></a>
+                            <a href=""><i class="fa fa-bar-chart-o fa-fw"></i> Quotation<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo site_url('Quotation/');?>">รายการใบเสนอราคา</a>
+                                    <a href="<?php echo site_url('Quotation/');?>"> รายการ Quotation</a>
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
+                
                         <li>
                             <a href=""><i class="fa fa-edit fa-fw"></i> Purchase Order<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

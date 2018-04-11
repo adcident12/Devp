@@ -25,27 +25,36 @@
                             <table width="100%" class="table  table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>สินค้า</th>
-                                        <th>ราคารวม(THB)</th>
+                                        <th>ราคา</th>
+                                        <th>จำนวน</th>
+                                        <th>ราคารวม</th>
+                                        <th>VAT(%)</th>
+                                        <th>ราคารวมVAT</th>
+                                        <th></th>
                                         
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php if($product_in_quotation['Quotation_product'] == '' || $product_in_quotation['Quotation_price'] == ''){?>
-                                    <tr class="odd gradeX">
-                                        <td>No data available in table</td>
-                                        <td></td>
+                                 <?php $i=1; foreach($get_Quotation_detail_in_product as $row) {?>
+                                    <tr>
+                                        <td><?php echo $i++; ?></td>
+                                        <td><?php echo $row['Pro_name']; ?></td>
+                                        <td><?php echo $row['Qd_price']; ?></td>
+                                        <td><?php echo $row['Qd_qty']; ?></td>
+                                        <td><?php echo $row['Qd_total']; ?></td>
+                                        <td><?php echo $row['Qd_vat']; ?></td>
+                                        <td><?php echo $row['Qd_total_vat']; ?></td>
+                                        <td class="text-center">
+                                        <form action="<?php echo site_url('Quotation/clear/'.$row['Quo_id'].'/'.$row['Cus_id']);?>" method="">
+                                        <button type="submit" class="btn btn-danger" OnClick="return chkdel();"> ลบ</button>
+                                        </form>
+                                        </td>
                                     </tr> 
-                                <?php }else{ ?>
 
-                                    <tr class="odd gradeX">
-                                        <td><?php echo $product_in_quotation['Quotation_product'];?></td>
-                                        <td><?php echo $product_in_quotation['Quotation_price']."/".$product_in_quotation['Quotation_volume']." ชิ้น";?></td>
-                                    </tr> 
-
-                                <?php }?>
-                         
+                                <?php } ?>
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
@@ -66,7 +75,10 @@
         <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-         <form action="<?php echo site_url('Quotation/add_product/'.$product_in_quotation['Quotation_id']);?>" method="post">
+         <form action="<?php echo site_url('Quotation/add_product/');?>" method="post">
+         <input  type="hidden" name="Quo_id" value="<?php echo $Quo_id; ?>">
+         <input  type="hidden" name="Cus_id" value="<?php echo $Cus_id ;?>">
+
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">เพิ่มสินค้า</h5>
@@ -75,22 +87,33 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
+                <div class="form-group">
                         <label> สินค้า</label>
-                        <textarea class="form-control" type="text" rows="3" name="product" required><?php echo $product_in_quotation['Quotation_product'];?></textarea>
-                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <p class="help-block"><code>*กรุณาเลือก.</code></p>
+                        <select class="form-control" name="Pro_id" >
+                            <option>--- กรุณาเลือก ---</option>
+                            <?php foreach($product as $row) {?>
+                            <option value="<?php echo $row['Pro_id'];?>" ><?php echo $row['Pro_name'];?></option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label> ราคา(THB)</label>
+                        <label> ราคา</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="number" min="0" name="price" placeholder="กรุณากรอก" required>
+                        <input class="form-control" type="number" min="0" name="Qd_price" value="<?php echo $Quotation_detail['Qd_price']; ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label> จำนวน</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="number" min="0" name="volume" value="<?php echo $product_in_quotation['Quotation_volume'];?>" required>
+                        <input class="form-control" type="number" min="0" name="Qd_qty" value="<?php echo $Quotation_detail['Qd_qty']; ?>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label> VAT(%)</label>
+                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="number" min="0" name="Qd_vat" value="<?php echo $Quotation_detail['Qd_vat']; ?>" required>
                     </div>
 
                 </div>

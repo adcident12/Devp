@@ -9,35 +9,63 @@ class Quotation_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_by_id($Quotation_id)
+    public function get_by_id($Quo_id)
     {
-        $this->db->where('Quotation_id', $Quotation_id);
+        $this->db->where('Quo_id', $Quo_id);
         $this->db->from('Quotation');
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function company_by_customer()
-    {
-        $this->db->select('*');
-        $this->db->from('Company');
-        $this->db->join('Customer', 'Customer.Company_id = Company.Company_id');
-        // $this->db->join('Quotation', 'Quotation.Quotation_person = Customer.Customer_name');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
+
     public function insert($array)
     {
         return $this->db->insert('Quotation',$array);
     }
-    public function update($Quotation_id, $array)
+    public function update($Quo_id, $array)
     {
-        $this->db->where('Quotation_id', $Quotation_id);
+        $this->db->where('Quo_id', $Quo_id);
         return $this->db->update('Quotation' ,$array);
     }
-    public function delete($Quotation_id)
+    public function delete($Pro_id)
     {
-        $this->db->where('Quotation_id', $Quotation_id);
-        return $this->db->delete('Quotation');
+        $this->db->where('Pro_id', $Pro_id);
+        return $this->db->delete('Quotation_detail');
+    }
+    public function customer_in_quotation()
+    {
+        $this->db->select('*');
+        $this->db->from('Customer');
+        $this->db->join('Quotation', 'Customer.Cus_id = Quotation.check');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function customer_in_quotation_by_id($Quo_id)
+    {
+        $this->db->select('*');
+        $this->db->where('Quo_id', $Quo_id);
+        $this->db->from('Customer');
+        $this->db->join('Quotation', 'Customer.Cus_id = Quotation.check');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function replace_Quotation_detail($array)
+    {
+        return $this->db->replace('Quotation_detail', $array);
+    }
+    public function gets_Quotation_detail()
+    {
+        $this->db->from('Quotation_detail');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function get_Quotation_detail_in_product($Quo_id)
+    {
+        $this->db->select('*');
+        $this->db->where('Quo_id', $Quo_id);
+        $this->db->from('Product');
+        $this->db->join('Quotation_detail', 'Product.Pro_id = Quotation_detail.Pro_id');
+        $query = $this->db->get();
+        return $query->result_array();
     }
     
 }

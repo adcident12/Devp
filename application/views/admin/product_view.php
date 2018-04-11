@@ -2,7 +2,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"> Customer</h1>
+            <h1 class="page-header"> Product</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -26,22 +26,20 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>ลำดับ</th>
+                                        <th></th>
                                         <th>สินค้า</th>
-                                        <th>ราคา(THB)</th>
                                         <th></th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
                                  <?php $i=1; foreach($product as $row) {?>
-                                    <tr class="odd gradeX">
+                                    <tr>
                                         <td class="text-center"><?php echo $i++; ?></td>
-                                        <td><?php echo $row['Product_name']; ?></td>
-                                        <td><?php echo $row['Product_price'];?></td>
+                                        <td><?php echo $row['Pro_name']; ?></td>
                                         <td class="text-center">
-                                         <a href="<?php echo site_url('Product/edit_form/'.$row['Product_id']);?>" class="btn btn-warning btn-md btn-block"> แก้ไข</a>
-                                         <a href="<?php echo site_url('Product/clear/'.$row['Product_id']);?>" class="btn btn-danger btn-md btn-block" OnClick="return chkdel();"> ลบ</a>
+                                         <a href="<?php echo site_url('Product/edit_form/'.$row['Pro_id']);?>" class="btn btn-warning btn-md btn-block"> แก้ไข</a>
+                                         <a href="<?php echo site_url('Product/clear/'.$row['Pro_id']);?>" class="btn btn-danger btn-md btn-block" OnClick="return chkdel();"> ลบ</a>
                                         </td>
                                     </tr>
                                  <?php } ?>
@@ -76,20 +74,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label> สินค้า</label>
-                        <input class="form-control" type="text" name="product" placeholder="กรุณากรอก" required>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label> ราคา(THB)</label>
-                        <input class="form-control" type="number" min="0" name="price" placeholder="กรุณากรอก" required>
-                        <p class="help-block"><code>*กรุณากรอก.</code></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label> จำนวน</label>
-                        <input class="form-control" type="number" min="0" name="volume" placeholder="กรุณากรอก" disabled>
-                        <p class="help-block"><code>*กรุณากรอก.</code></p>
+                        <input class="form-control" type="text" name="Pro_name" placeholder="กรุณากรอก" required>
                     </div>
 
                 </div>
