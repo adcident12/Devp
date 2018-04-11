@@ -1,0 +1,8 @@
+<script>
+    function run() {
+    	var url = '/get.php?id='+document.getElementById("Ultra").value
+    	jQuery.get(url, function(result) {
+        	document.getElementById("srt").value = $ตัวแปรที่ get จาก database;
+        }, 'json');
+    }
+</script>

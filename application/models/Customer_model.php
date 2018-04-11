@@ -30,5 +30,12 @@ class Customer_model extends CI_Model {
         $this->db->where('Customer_id',$Customer_id);
         return $this->db->delete('Customer');
     }
+    public function get_by_company_id($Company_id)
+    {
+        $this->db->where('Company_id', $Company_id);
+        $this->db->from('Customer');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
 }

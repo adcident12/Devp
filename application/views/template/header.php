@@ -11,6 +11,9 @@
 
     <title>ERP basic</title>
 
+    <!-- jQuery -->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js');?>"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('assets/vendor/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet">
 

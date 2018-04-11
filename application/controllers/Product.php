@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Purchase_order extends CI_Controller {
+class Product extends CI_Controller {
 
 	public function index($status = '')
     {
@@ -36,30 +36,43 @@ class Purchase_order extends CI_Controller {
         else {
             $data['status'] = '';
         }
-        $data['purchase_order'] = $this->Purchase_order->gets();
-        $data['company_by_customer'] = $this->Quotation->company_by_customer(); 
-        $data['quotation'] = $this->Purchase_order->customer_by_qoutation(); 
 
-        
-        // print_r($data);
-        // die();
-        $this->template->view('admin/purchase_order_view', $data);
+        $data['product'] = $this->Product->gets();
+        $this->template->view('admin/product_view', $data);
     }
-    public function add_purchase_order()
+    public function add()
     {
         // print_r($_POST);
-        $array['Purchase_Order_person'] = $this->input->post('person');//คน
-        $array['Purchase_Order_num'] = $this->input->post('po'); //ใบPO
-        $array['Purchase_Order_company'] = $this->input->post('company'); //บริษัท
-        $array['Purchase_Order_tax'] = $this->input->post('tax'); //เลขประจำตัวคนเสียภาษี
-        $array['Purchase_Order_date_create'] = date('Y-m-d');//เวลาที่สร้าง
-        $array['Purchase_Order_date_delivery'] = $this->input->post('date');//เวลาที่ส่ง
-
+        $array['Product_name'] = $this->input->post('product');
+        $array['Product_price'] = $this->input->post('price');
+        $array['Product_volume'] = $this->input->post('volume');
         // print_r($array);
-        // die();
+        $this->Product->insert($array);
+        redirect('Product/index?status=success', 'refresh');
 
-        $this->Purchase_order->insert($array);
-        redirect('Purchase_order/index?status=success', 'refresh');
+    
+    }
+    public function edit_form($product_id)
+    {   
+        $data['product'] = $this->Product->get_by_id($product_id)[0];
+        // print_r($data);
+        $this->template->view('admin/product_edit_form_view',$data);
+    }
+    public function edit($product_id)
+    {
+        // print_r($_POST);
+        $array['Product_name'] = $this->input->post('product');
+        $array['Product_price'] = $this->input->post('price');
+        $array['Product_volume'] = $this->input->post('volume');
+        // print_r($array);
+        $this->Product->update($product_id, $array);
+        redirect('Product/index?status=edit_success', 'refresh');
 
+    }
+    public function clear($product_id)
+    {
+        $this->Product->delete($product_id);
+
+        redirect('Product/index?status=delete_success', 'refresh');
     }
 }

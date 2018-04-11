@@ -53,8 +53,8 @@
                                          <a href="" class="btn btn-info btn-md btn-block"> ประวัติการสั่งซื้อ</a> 
                                         </td>
                                         <td class="text-center">
-                                         <a href="<?php echo site_url('Customer/edit_form/'.$row['customer']['Customer_id']);?>" class="btn btn-warning"> แก้ไข</a>
-                                         <a href="<?php echo site_url('Customer/clear/'.$row['customer']['Customer_id']);?>" class="btn btn-danger" OnClick="return chkdel();"> ลบ</a>
+                                         <a href="<?php echo site_url('Customer/edit_form/'.$row['customer']['Customer_id']);?>" class="btn btn-warning btn-md btn-block"> แก้ไข</a>
+                                         <a href="<?php echo site_url('Customer/clear/'.$row['customer']['Customer_id']);?>" class="btn btn-danger btn-md btn-block" OnClick="return chkdel();"> ลบ</a>
                                         </td>
                                     </tr>
                                     <?php } ?>
