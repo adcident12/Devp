@@ -26,31 +26,29 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>ลำดับ</th>
-                                        <th>วันที่ออก PO</th>
-                                        <th>วันที่ออกส่ง</th>
-                                        <th>เลขที่ใบเสนอราคา</th>
+                                        <th></th>
                                         <th>PO NO.</th>
+                                        <th>วันที่สร้าง</th>
+                                        <th>วันที่ส่ง</th>
+                                        <th>เลขที่ใบเสนอราคา</th>
                                         <th>บริษัท</th>
                                         <th>ผู้สั่งซื้อ</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                 <?php $i=1; foreach($purchase_order as $row) { ?>
-                                    <tr class="odd gradeX">
-                                        <td><?php echo $i++;?></td>
-                                        <td><?php echo $row['Purchase_Order_date_create'];?></td>
-                                        <td><?php echo $row['Purchase_Order_date_delivery'];?></td>
-                                        <td><?php echo $row['Purchase_Order_Qnum'];?></td>
-                                        <td><?php echo $row['Purchase_Order_num'];?></td>
-                                        <td><?php echo $row['Purchase_Order_company'];?></td>
-                                        <td><?php echo $row['Purchase_Order_person'];?></td>
+                                 <?php $i=1; foreach($PurchaseOder as $row) {?>
+                                    <tr>
+                                        <td><?php echo $i++; ?></td>
+                                        <td><?php echo $row['PO_No']; ?></td>
+                                        <td><?php echo $row['PO_date']; ?></td>
+                                        <td><?php echo $row['PO_delivery_date']; ?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td class="text-center">
-                                         <a href="" class="btn btn-info"> เพิ่มสินค้า</a>
-                                         <a href="" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal"> แก้ไข</a>
-                                         <a href="" class="btn btn-danger" OnClick="return chkdel();"> ลบ</a>
+                                         <a href="<?php echo site_url('Purchase_order/add_from_product_in_purchase_order/'.$row['PO_id']);?>" class="btn btn-info"> เพิ่มสินค้า</a>
+                                         <a href="<?php echo site_url('Purchase_order/edit_from_purchase_order/'.$row['PO_id']);?>" class="btn btn-warning"> แก้ไข</a>
                                         </td>
                                     </tr>
                                  <?php } ?>
@@ -86,55 +84,21 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label> คุณ</label>
-                        <p class="help-block"><code>*กรุณาเลือก.</code></p>
-                        <select class="form-control" name="person" id="person" required>
-                            <option>--- กรุณาเลือก ---</option>
-                         <?php foreach ($company_by_customer as $row) { ?>
-                            <option value="<?php echo $row['Customer_name'];?>" data-name="<?php echo $row['Company_name'];?>" data-name1="<?php echo $row['Customer_tex'];?>"><?php echo $row['Customer_name']." บริษัท ".$row['Company_name'];?></option>
-                         <?php } ?>   
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label> เลขที่ใบเสนอราคา</label>
-                        <p class="help-block"><code>*กรุณาเลือก.</code></p>
-                        <select class="form-control" name="Qnum" id="Qnum" required>
-                            <option>--- กรุณาเลือก ---</option>
-                         <?php foreach ($quotation as $row) { ?>
-                            <option value="<?php echo $row['Qoutation_num'];?>" data-name="<?php echo $row['Quotation_product'];?>" ><?php echo $row['Qoutation_num']." สินค้า ".$row['Quotation_product'];?></option>
-                         <?php } ?>   
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label> สินค้า</label>
-                        <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="text" name="product" id="product" required>
-                    </div>
-
-                    <div class="form-group">
                         <label> PO No.</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="text" name="po" placeholder="กรุณากรอก" required>
+                        <input class="form-control" type="text" name="PO_No" placeholder="กรุณากรอก" required>
                     </div>
 
                     <div class="form-group">
-                        <label> บริษัท</label>
+                        <label> วันที่ออก</label>
                         <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="text" name="company" id="company" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label> เลขที่ประจำตัวผู้เสียภาษี</label>
-                        <p class="help-block"><code>*กรุณากรอก.</code></p>
-                        <input class="form-control" type="text" name="tax" id="tax" required>
+                        <input class="form-control" type="text" name="PO_date" value="<?php echo date('Y-m-d');?>" required disabled>
                     </div>
 
                     <div class="form-group">
                         <label> วัน/เดือน/ปี(ส่ง)</label>
                         <p class="help-block"><code>*กรุณากรอก YYYY-MM-DD. ขณะนี้:<B id="demo"></B></code></p>
-                            <input type="text" class="form-control" name="date" placeholder="YYYY-MM-DD" required 
+                            <input type="text" class="form-control" name="PO_delivery_date" placeholder="YYYY-MM-DD" required 
                                 pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" 
                                 title="Enter a date in this format YYYY-MM-DD"/>
                         
